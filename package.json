@@ -1,0 +1,25 @@
+{
+  "name": "fafnir",
+  "preferGlobal": true,
+  "version": "1.0.0",
+  "homepage": "https://github.com/antimatter15/fafnir",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/antimatter15/fafnir.git"
+  },
+  "bugs": {
+    "url": "http://github.com/antimatter15/fafnir/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/antimatter15/fafnir/blob/master/LICENSE"
+    }
+  ],
+  "bin": {
+    "fafnir": "bin/fafnir"
+  },
+  "dependencies": {
+    "optimist": "~0.6.1"
+  }
+}

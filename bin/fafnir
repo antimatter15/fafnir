@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+var argv = require('optimist')
+    .usage('a simple way to save stuff onto disk from js.\n\nUsage: $0 [file name]')
+    .demand('_')
+    .default('host', '127.0.0.1')
+    .describe('host', 'what ip address to listen on')
+    .describe('port', 'HTTP port to listen on')
+    .default('port', 6005)
+    .alias('p', 'port')
+    .describe('_', 'File prefix to save documents')
+    .argv;
+
+var filename_prefix = argv._;
+
+var http = require('http'),
+	path = require('path'),
+	fs = require('fs');
+
+http.createServer(function(req, res) {
+	res.writeHead(200, {'Content-Type': 'text/plain', 'access-control-allow-origin': '*'});
+	if(req.method.toUpperCase() == "POST"){
+		var file = path.normalize(req.url);
+		console.log(file);
+		req.pipe(fs.createWriteStream(filename_prefix + file.slice(1)))
+		res.end("fin.\n");
+	}else{
+		res.end("I'm sorry, but we only accept postcards from Paris.\n");
+	}
+}).listen(argv.port, '127.0.0.1');
+
+function fafnir(data, optional_name){
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'http://$$$$$:_____/' + (optional_name || ''), true);
+	xhr.send(typeof data == "object" ? JSON.stringify(data) : data);
+}
+
+console.log(fafnir.toString()
+		.replace("_____", argv.port)
+		.replace("$$$$$", argv.host));
+
